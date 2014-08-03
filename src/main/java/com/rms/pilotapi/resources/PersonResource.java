@@ -10,7 +10,6 @@ import org.joda.time.DateTime;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Path("/persons")
 @Produces(MediaType.APPLICATION_JSON)
@@ -22,8 +21,8 @@ public class PersonResource {
     @Timed
     public Person getPerson(@QueryParam("name") Optional<String> name) {
         Coordinates coordinates = new Coordinates();
-        coordinates.setLatitude("23° 26′ 21″ S");
-        coordinates.setLongitude("46° 52′ 42″ N");
+        coordinates.setLatitude("23N");
+        coordinates.setLongitude("46S");
 
         Address address = new Address();
         address.setCity("Fremont");
@@ -33,7 +32,7 @@ public class PersonResource {
 
         Person person = new Person();
         person.setName("John Doe");
-        person.setBirthDateTime(DateTime.now());
+        person.setBirthDateTime(new DateTime("2012-11-21T13:01:33.568Z"));
         person.setAge(10);
         person.setAddress(address);
 
@@ -44,8 +43,8 @@ public class PersonResource {
     @Timed
     public Person createPerson(@Valid Person person) {
         Coordinates coordinates = new Coordinates();
-        coordinates.setLatitude("23° 26′ 21″ S");
-        coordinates.setLongitude("46° 52′ 42″ N");
+        coordinates.setLatitude("23N");
+        coordinates.setLongitude("46S");
 
         Address address = new Address();
         address.setCity("Fremont");
@@ -55,7 +54,7 @@ public class PersonResource {
 
         Person person1 = new Person();
         person1.setName("John Doe");
-        person1.setBirthDateTime(DateTime.now());
+        person.setBirthDateTime(new DateTime("2012-11-21T13:01:33.568Z"));
         person1.setAge(10);
         person1.setAddress(address);
 
@@ -66,8 +65,8 @@ public class PersonResource {
     @Timed
     public Person updatePerson(@Valid Person person) {
         Coordinates coordinates = new Coordinates();
-        coordinates.setLatitude("23° 26′ 21″ S");
-        coordinates.setLongitude("46° 52′ 42″ N");
+        coordinates.setLatitude("23N");
+        coordinates.setLongitude("46S");
 
         Address address = new Address();
         address.setCity("Fremont");
@@ -77,7 +76,7 @@ public class PersonResource {
 
         Person person1 = new Person();
         person1.setName("John Doe");
-        person1.setBirthDateTime(DateTime.now());
+        person.setBirthDateTime(new DateTime("2012-11-21T13:01:33.568Z"));
         person1.setAge(10);
         person1.setAddress(address);
 
