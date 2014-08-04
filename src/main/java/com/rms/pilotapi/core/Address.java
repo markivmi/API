@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Address {
     private String street;
+    private String city;
+    private String zip;
+    private Coordinates coordinates;
 
     @JsonProperty
     public String getStreet() {
@@ -15,8 +18,6 @@ public class Address {
         this.street = street;
     }
 
-    private String city;
-
     @JsonProperty
     public String getCity() {
         return city;
@@ -27,8 +28,6 @@ public class Address {
         this.city = city;
     }
 
-    private String zip;
-
     @JsonProperty
     public String getZip() {
         return zip;
@@ -38,8 +37,6 @@ public class Address {
     public void setZip(String zip) {
         this.zip = zip;
     }
-
-    private Coordinates coordinates;
 
     @JsonProperty
     public Coordinates getCoordinates() {

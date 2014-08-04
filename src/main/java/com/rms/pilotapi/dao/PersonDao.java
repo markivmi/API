@@ -12,5 +12,4 @@ public interface PersonDao {
     Person updatePerson(Person person);
 
     boolean deletePerson(Person person);
-
 }
