@@ -9,17 +9,18 @@ import io.dropwizard.jackson.Jackson;
 import org.joda.time.DateTime;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import static io.dropwizard.testing.FixtureHelpers.fixture;
 import static org.fest.assertions.Assertions.assertThat;
+import org.slf4j.*;
 
 public class PersonTest {
 
     private static ObjectMapper MAPPER;
     private static Person person;
-
+    private static Logger lOGGER = LoggerFactory.getLogger(PersonTest.class);
     @BeforeClass
     public static void setup() {
+        lOGGER.info("Persion Test Started");
         MAPPER = Jackson.newObjectMapper();
         MAPPER.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
@@ -38,6 +39,8 @@ public class PersonTest {
         person.setBirthDateTime(new DateTime("2012-11-21T13:01:33.568Z"));
         person.setAge(10);
         person.setAddress(address);
+
+        lOGGER.info("Persion Test End");
     }
 
     @Test
