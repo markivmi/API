@@ -1,19 +1,21 @@
 package com.rms.auth;
 
 import com.google.common.base.Optional;
+import com.rms.pilotapi.core.Person;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
 import io.dropwizard.auth.oauth.OAuthProvider;
 import org.eclipse.jetty.server.Authentication;
 
-public class OAuthImpl  extends OAuthProvider<Authentication.User> implements RmsAuth<String> {
+public class OAuthImpl  extends OAuthProvider<Person> implements RmsAuth<String> {
 
-    public OAuthImpl(Authenticator<String, Authentication.User> authenticator, String realm) {
+    public OAuthImpl(Authenticator<String, Person> authenticator, String realm) {
         super(authenticator, realm);
     }
 
     @Override
-    public Optional<Authentication.User> authenticate(String s) throws AuthenticationException {
+    public Optional<Person> authenticate(String s) throws AuthenticationException {
         return null;
     }
+
 }
