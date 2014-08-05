@@ -4,11 +4,13 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.rms.pilotapi.dao.PersonDao;
-import com.rms.pilotapi.health.DatabaseHealthCheck;
+import com.rms.pilotapi.health.MongoHealthCheck;
 import com.rms.pilotapi.resources.PersonResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+
+import java.net.UnknownHostException;
 
 public class PilotAPIApplication extends Application<PilotAPIConfiguration> {
     public static void main(String[] args) throws Exception {
@@ -26,17 +28,18 @@ public class PilotAPIApplication extends Application<PilotAPIConfiguration> {
     }
 
     @Override
-    public void run(PilotAPIConfiguration configuration, Environment environment) {
+    public void run(PilotAPIConfiguration configuration, Environment environment) throws UnknownHostException {
         // Create new injector instance
-        Injector injector = Guice.createInjector(new PilotAPIModule());
+        PilotAPIModule pilotAPIModule = new PilotAPIModule(configuration);
+        Injector injector = Guice.createInjector(pilotAPIModule);
 
         // Register resources
         final PersonResource personResource = new PersonResource(injector.getInstance(PersonDao.class));
         environment.jersey().register(personResource);
 
         // Register database health check
-        final DatabaseHealthCheck databaseHealthCheck = new DatabaseHealthCheck(configuration.getConnectionString());
-        environment.healthChecks().register("database", databaseHealthCheck);
+        final MongoHealthCheck mongoHealthCheck = new MongoHealthCheck(pilotAPIModule.getDB());
+        environment.healthChecks().register("database", mongoHealthCheck);
 
         //Set datetime serialization format to ISO-8601
         environment.getObjectMapper().configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);

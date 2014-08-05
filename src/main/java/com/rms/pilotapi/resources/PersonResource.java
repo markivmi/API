@@ -1,7 +1,6 @@
 package com.rms.pilotapi.resources;
 
 import com.codahale.metrics.annotation.Timed;
-import com.google.common.base.Optional;
 import com.google.inject.Inject;
 import com.rms.pilotapi.core.Person;
 import com.rms.pilotapi.dao.PersonDao;
@@ -23,8 +22,8 @@ public class PersonResource {
 
     @GET
     @Timed
-    public Person getPerson(@QueryParam("name") Optional<String> name) {
-        return personDao.getPerson(name);
+    public Person getPerson(@QueryParam("id") int id) {
+        return personDao.getPerson(id);
     }
 
     @POST
@@ -35,13 +34,13 @@ public class PersonResource {
 
     @PUT
     @Timed
-    public Person updatePerson(@Valid Person person) {
-        return personDao.updatePerson(person);
+    public Person updatePerson(@QueryParam("id") int id, @Valid Person person) {
+        return personDao.updatePerson(id, person);
     }
 
     @DELETE
     @Timed
-    public boolean deletePerson(@Valid Person person) {
-        return personDao.deletePerson(person);
+    public boolean deletePerson(@QueryParam("id") int id) {
+        return personDao.deletePerson(id);
     }
 }

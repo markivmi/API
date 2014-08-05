@@ -5,12 +5,23 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.DateTime;
 
 public class Person {
+    private int id;
     @NotEmpty
     private String name;
     @NotEmpty
     private int age;
     private DateTime birthDateTime;
     private Address address;
+
+    @JsonProperty
+    public int getId() {
+        return id;
+    }
+
+    @JsonProperty
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @JsonProperty
     public String getName() {
