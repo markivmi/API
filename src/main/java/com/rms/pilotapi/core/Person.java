@@ -13,6 +13,10 @@ public class Person {
     private DateTime birthDateTime;
     private Address address;
 
+    public Person(String name) {
+        this.name = name;
+    }
+
     @JsonProperty
     public int getId() {
         return id;
