@@ -7,6 +7,10 @@ import org.joda.time.DateTime;
 public class Person {
     @NotEmpty
     private String name;
+    @NotEmpty
+    private int age;
+    private DateTime birthDateTime;
+    private Address address;
 
     @JsonProperty
     public String getName() {
@@ -18,9 +22,6 @@ public class Person {
         this.name = name;
     }
 
-    @NotEmpty
-    private int age;
-
     @JsonProperty
     public int getAge() {
         return age;
@@ -31,8 +32,6 @@ public class Person {
         this.age = age;
     }
 
-    private DateTime birthDateTime;
-
     @JsonProperty
     public DateTime getBirthDateTime() {
         return birthDateTime;
@@ -42,8 +41,6 @@ public class Person {
     public void setBirthDateTime(DateTime birthDateTime) {
         this.birthDateTime = birthDateTime;
     }
-
-    private Address address;
 
     @JsonProperty
     public Address getAddress() {

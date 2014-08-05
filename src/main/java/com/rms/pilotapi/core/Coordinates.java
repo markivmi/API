@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Coordinates {
     private String latitude;
+    private String longitude;
 
     @JsonProperty
     public String getLatitude() {
@@ -14,8 +15,6 @@ public class Coordinates {
     public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
-
-    private String longitude;
 
     @JsonProperty
     public String getLongitude() {

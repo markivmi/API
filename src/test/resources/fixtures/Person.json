@@ -1,14 +1,1 @@
-{
-    "name": "John Doe",
-    "age": 10,
-    "birthDateTime": 1406827115471,
-    "address": {
-        "street": "Mowry Blvd",
-        "city": "Fremont",
-        "zip": "94538",
-        "coordinates": {
-            "latitude": "23° 26′ 21″ S",
-            "longitude": "46° 52′ 42″ N"
-        }
-    }
-}
+{"name":"John Doe","age":10,"birthDateTime":"2012-11-21T13:01:33.568Z","address":{"street":"Mowry Blvd","city":"Fremont","zip":"94538","coordinates":{"latitude":"23N","longitude":"46S"}}}
