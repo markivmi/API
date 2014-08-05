@@ -9,32 +9,17 @@ import io.dropwizard.jackson.Jackson;
 import org.joda.time.DateTime;
 import org.junit.BeforeClass;
 import org.junit.Test;
-<<<<<<< HEAD
 
 import static io.dropwizard.testing.FixtureHelpers.fixture;
-=======
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import static io.dropwizard.testing.FixtureHelpers.*;
->>>>>>> origin/master
 import static org.fest.assertions.Assertions.assertThat;
 
 public class PersonTest {
 
     private static ObjectMapper MAPPER;
     private static Person person;
-<<<<<<< HEAD
 
     @BeforeClass
     public static void setup() {
-=======
-    private static Logger logger = LoggerFactory.getLogger(PersonTest.class);
-    @BeforeClass
-    public static void setup() {
-
-        logger.info("Person Test started");
->>>>>>> origin/master
         MAPPER = Jackson.newObjectMapper();
         MAPPER.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
@@ -48,20 +33,11 @@ public class PersonTest {
         address.setZip("94538");
         address.setCoordinates(coordinates);
 
-<<<<<<< HEAD
         person = new Person();
-=======
-        person = new Person("test");
->>>>>>> origin/master
         person.setName("John Doe");
         person.setBirthDateTime(new DateTime("2012-11-21T13:01:33.568Z"));
         person.setAge(10);
         person.setAddress(address);
-<<<<<<< HEAD
-=======
-
-        logger.info("Person Test End");
->>>>>>> origin/master
     }
 
     @Test
@@ -74,8 +50,4 @@ public class PersonTest {
 //    public void deserializesFromJSON() throws Exception {
 //        assertThat(MAPPER.readValue(fixture("fixtures/person.json"), Person.class)).isEqualTo(person);
 //    }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/master
