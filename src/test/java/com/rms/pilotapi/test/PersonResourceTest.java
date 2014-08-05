@@ -52,7 +52,6 @@ public class PersonResourceTest {
         reset(personDao);
     }
 
-    @Test
     public void testGetPerson() {
         assertThat(resources.client().resource("/person/blah").get(Person.class))
                 .isEqualTo(person);

@@ -5,13 +5,20 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.rms.pilotapi.core.Address;
 import com.rms.pilotapi.core.Coordinates;
 import com.rms.pilotapi.core.Person;
+import com.rms.pilotapi.dao.PersonDao;
+import com.rms.pilotapi.dao.PersonDaoMongoImpl;
+import com.rms.pilotapi.resources.PersonResource;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.WebResource;
 import io.dropwizard.jackson.Jackson;
+import io.dropwizard.testing.junit.ResourceTestRule;
 import org.joda.time.DateTime;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static io.dropwizard.testing.FixtureHelpers.fixture;
 import static org.fest.assertions.Assertions.assertThat;
 import org.slf4j.*;
+import static org.mockito.Mockito.*;
 
 public class PersonTest {
 
@@ -46,6 +53,30 @@ public class PersonTest {
     @Test
     public void serializesToJSON() throws Exception {
         assertThat(MAPPER.writeValueAsString(person)).isEqualTo(fixture("fixtures/person.json"));
+    }
+
+    @Test
+    public void authenticatedTestGetPositive() {
+        Person test = new Person("Test");
+        test.setId(0);
+        test.setAge(10);
+
+        PersonDao testDao = mock(PersonDaoMongoImpl.class);
+        testDao.createPerson(test);
+
+         ResourceTestRule resource = ResourceTestRule.builder()
+                .addResource(new PersonResource(testDao))
+                .build();
+
+        Client c = resource.client();
+        WebResource res = c.resource("/persons/getAuthPerson/0");
+        WebResource.Builder builder = res.getRequestBuilder();
+        builder.header("Authorization","Basic dGVzdDpzZWNyZXQ=");
+
+        Person gotPerson = builder.get(Person.class);
+
+        assertThat(gotPerson).isEqualTo(test);
+
     }
 
     //TODO

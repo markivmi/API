@@ -16,6 +16,7 @@ import io.dropwizard.setup.Environment;
 import java.net.UnknownHostException;
 
 public class PilotAPIApplication extends Application<PilotAPIConfiguration> {
+
     public static void main(String[] args) throws Exception {
         new PilotAPIApplication().run(args);
     }
@@ -47,7 +48,7 @@ public class PilotAPIApplication extends Application<PilotAPIConfiguration> {
         //Set datetime serialization format to ISO-8601
         environment.getObjectMapper().configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
-        //Add authenticator
+        //Register basic authenticator
         environment.jersey().register(new BasicAuthProvider<Person>(new BasicAuth(), "Authentication"));
     }
 }

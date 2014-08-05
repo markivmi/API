@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
 import com.rms.pilotapi.core.Person;
 import com.rms.pilotapi.dao.PersonDao;
+import io.dropwizard.auth.Auth;
 
 import javax.validation.Valid;
 import javax.ws.rs.*;
@@ -18,6 +19,29 @@ public class PersonResource {
     @Inject
     public PersonResource(PersonDao personDao) {
         this.personDao = personDao;
+    }
+
+    @GET
+    @Timed
+    @Path("/getAuthPerson/{id}")
+    public Person getAuthPerson(@PathParam("id")int id, @Auth Person user) {
+
+        /* use HTTP header:
+        Authorization : Basic dGVzdDpzZWNyZXQ=
+
+        For negative test case, use
+        Authorization : Basic dGVzdDoxMjM=
+         */
+
+        if(user.getName().isEmpty()) {
+            return null;
+        }
+        Person p = new Person();
+        p.setName("Test");
+        p.setId(0);
+        p.setAge(10);
+
+        return p;
     }
 
     @GET
