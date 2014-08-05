@@ -1,15 +1,13 @@
 package com.rms.pilotapi.dao;
 
-import com.google.common.base.Optional;
 import com.rms.pilotapi.core.Person;
 
 public interface PersonDao {
-
-    Person getPerson(Optional<String> name);
+    Person getPerson(Integer id);
 
     Person createPerson(Person person);
 
-    Person updatePerson(Person person);
+    Person updatePerson(Integer id, Person person);
 
-    boolean deletePerson(Person person);
+    boolean deletePerson(Integer id);
 }
