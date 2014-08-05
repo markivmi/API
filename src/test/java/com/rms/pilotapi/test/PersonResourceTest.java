@@ -54,8 +54,20 @@ public class PersonResourceTest {
 
     @Test
     public void testGetPerson() {
-        assertThat(resources.client().resource("/person/blah").get(Person.class))
+        assertThat(resources.client().resource("/persons/123").get(Person.class))
                 .isEqualTo(person);
         verify(personDao).getPerson(123);
+    }
+
+    public void testCreatePerson() throws Exception {
+
+    }
+
+    public void testUpdatePerson() throws Exception {
+
+    }
+
+    public void testDeletePerson() throws Exception {
+
     }
 }
