@@ -13,6 +13,8 @@ public class Person {
     private DateTime birthDateTime;
     private Address address;
 
+    public Person(){
+    }
     public Person(String name) {
         this.name = name;
     }
