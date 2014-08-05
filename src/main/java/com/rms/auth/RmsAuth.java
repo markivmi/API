@@ -4,7 +4,6 @@ import com.google.common.base.Optional;
 import com.rms.pilotapi.core.Person;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
-import org.eclipse.jetty.server.Authentication;
 
 /**
  * Created by Vinay on 8/4/2014.

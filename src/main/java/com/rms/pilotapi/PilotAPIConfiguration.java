@@ -2,16 +2,24 @@ package com.rms.pilotapi;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
+import io.dropwizard.validation.Validated;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.Valid;
 
 //TODO : Guice it !!
 public class PilotAPIConfiguration extends Configuration {
     @NotEmpty
-    private String host;
+    private String host = "localhost";
+
+    @Valid
+    private int port = 8080;
+
     @NotEmpty
-    private int port;
-    @NotEmpty
-    private String database;
+    private String database = "pilotDb";
+
+    public PilotAPIConfiguration() {
+    }
 
     @JsonProperty
     public String getHost() {
