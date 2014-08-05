@@ -9,12 +9,15 @@ import com.rms.pilotapi.dao.PersonDao;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path("/persons")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class PersonResource {
     private final PersonDao personDao;
+    private static Logger logger = LoggerFactory.getLogger(PersonResource.class);
 
     @Inject
     public PersonResource(PersonDao personDao) {
@@ -24,8 +27,10 @@ public class PersonResource {
     @GET
     @Timed
     public Person getPerson(@QueryParam("name") Optional<String> name) {
+        logger.info("Get Person Started");
         return personDao.getPerson(name);
     }
+
 
     @POST
     @Timed

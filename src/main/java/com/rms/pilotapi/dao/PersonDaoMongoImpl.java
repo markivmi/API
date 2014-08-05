@@ -19,7 +19,7 @@ public class PersonDaoMongoImpl implements PersonDao {
         address.setZip("94538");
         address.setCoordinates(coordinates);
 
-        Person person = new Person();
+        Person person = new Person("test");
         person.setName("John Doe");
         person.setBirthDateTime(new DateTime("2012-11-21T13:01:33.568Z"));
         person.setAge(10);
@@ -40,7 +40,7 @@ public class PersonDaoMongoImpl implements PersonDao {
         address.setZip("94538");
         address.setCoordinates(coordinates);
 
-        Person person1 = new Person();
+        Person person1 = new Person("test");
         person1.setName("John Doe");
         person.setBirthDateTime(new DateTime("2012-11-21T13:01:33.568Z"));
         person1.setAge(10);
@@ -61,7 +61,7 @@ public class PersonDaoMongoImpl implements PersonDao {
         address.setZip("94538");
         address.setCoordinates(coordinates);
 
-        Person person1 = new Person();
+        Person person1 = new Person("test");
         person1.setName("John Doe");
         person.setBirthDateTime(new DateTime("2012-11-21T13:01:33.568Z"));
         person1.setAge(10);
