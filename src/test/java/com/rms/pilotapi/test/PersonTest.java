@@ -20,11 +20,13 @@ import static org.fest.assertions.Assertions.assertThat;
 import org.slf4j.*;
 import static org.mockito.Mockito.*;
 
+
 public class PersonTest {
 
     private static ObjectMapper MAPPER;
     private static Person person;
     private static Logger lOGGER = LoggerFactory.getLogger(PersonTest.class);
+
     @BeforeClass
     public static void setup() {
         lOGGER.info("Persion Test Started");
@@ -47,7 +49,7 @@ public class PersonTest {
         person.setAge(10);
         person.setAddress(address);
 
-        lOGGER.info("Persion Test End");
+        lOGGER.info("Person Test End");
     }
 
     @Test
@@ -55,29 +57,7 @@ public class PersonTest {
         assertThat(MAPPER.writeValueAsString(person)).isEqualTo(fixture("fixtures/person.json"));
     }
 
-    @Test
-    public void authenticatedTestGetPositive() {
-        Person test = new Person("Test");
-        test.setId(0);
-        test.setAge(10);
 
-        PersonDao testDao = mock(PersonDaoMongoImpl.class);
-        testDao.createPerson(test);
-
-         ResourceTestRule resource = ResourceTestRule.builder()
-                .addResource(new PersonResource(testDao))
-                .build();
-
-        Client c = resource.client();
-        WebResource res = c.resource("/persons/getAuthPerson/0");
-        WebResource.Builder builder = res.getRequestBuilder();
-        builder.header("Authorization","Basic dGVzdDpzZWNyZXQ=");
-
-        Person gotPerson = builder.get(Person.class);
-
-        assertThat(gotPerson).isEqualTo(test);
-
-    }
 
     //TODO
 //    @Test
