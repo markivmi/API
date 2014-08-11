@@ -36,17 +36,14 @@ public class PersonResource {
         if(user.getName().isEmpty()) {
             return null;
         }
-        Person p = new Person();
-        p.setName("Test");
-        p.setId(0);
-        p.setAge(10);
 
-        return p;
+        return personDao.getPerson(id);
     }
 
     @GET
     @Timed
-    public Person getPerson(@QueryParam("id") int id) {
+    @Path("/{id}")
+    public Person getPerson(@PathParam("id") int id) {
         return personDao.getPerson(id);
     }
 
@@ -58,13 +55,15 @@ public class PersonResource {
 
     @PUT
     @Timed
-    public Person updatePerson(@QueryParam("id") int id, @Valid Person person) {
+    @Path("/{id}")
+    public Person updatePerson(@PathParam("id") int id, @Valid Person person) {
         return personDao.updatePerson(id, person);
     }
 
     @DELETE
     @Timed
-    public boolean deletePerson(@QueryParam("id") int id) {
+    @Path("/{id}")
+    public boolean deletePerson(@PathParam("id") int id) {
         return personDao.deletePerson(id);
     }
 }
