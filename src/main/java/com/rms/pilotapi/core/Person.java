@@ -7,6 +7,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.DateTime;
 import org.mongojack.Id;
 
+import javax.validation.constraints.NotNull;
+
 public class Person {
     @Id
     private long id;
@@ -40,8 +42,7 @@ public class Person {
         return result;
     }
 
-    @NotEmpty
-
+    @NotNull
     private int age;
 
     private DateTime birthDateTime;
