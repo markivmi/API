@@ -82,9 +82,9 @@ public class PersonDaoMongoImplTest {
 
     @Test
     public void DeletePersonTest() {
-        /*Person person = personDao.createPerson(getDummyCreatePerson());
-        int id = person.getId();
-        assert (personDao.deletePerson(id) == true);*/
+        Person person = personDao.createPerson(getDummyCreatePerson());
+        long id = person.getId();
+        assert (personDao.deletePerson(id) == true);
     }
 
 }

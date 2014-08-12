@@ -54,9 +54,7 @@ public class PersonDaoMongoImpl implements PersonDao {
 
     @Override
     public boolean deletePerson(long id) {
-
         WriteResult wr = personCollection.removeById(id);
-
-        return wr.getError().isEmpty();
+        return (wr.getError() == null || wr.getError().isEmpty()) ;
     }
 }
