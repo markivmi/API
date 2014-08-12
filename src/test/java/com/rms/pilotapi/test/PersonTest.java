@@ -54,8 +54,6 @@ public class PersonTest {
         assertThat(MAPPER.writeValueAsString(person)).isEqualTo(fixture("fixtures/person.json"));
     }
 
-
-    //TODO
     @Test
     public void deserialiseFromJSON() throws Exception {
         Person p = MAPPER.readValue(fixture("fixtures/person.json"), Person.class);
