@@ -34,6 +34,12 @@ public class Address {
         return zip;
     }
 
+    @JsonProperty
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -44,9 +50,8 @@ public class Address {
         if (city != null ? !city.equals(address.city) : address.city != null) return false;
         if (coordinates != null ? !coordinates.equals(address.coordinates) : address.coordinates != null) return false;
         if (street != null ? !street.equals(address.street) : address.street != null) return false;
-        if (zip != null ? !zip.equals(address.zip) : address.zip != null) return false;
+        return !(zip != null ? !zip.equals(address.zip) : address.zip != null);
 
-        return true;
     }
 
     @Override
@@ -56,12 +61,6 @@ public class Address {
         result = 31 * result + (zip != null ? zip.hashCode() : 0);
         result = 31 * result + (coordinates != null ? coordinates.hashCode() : 0);
         return result;
-    }
-
-    @JsonProperty
-
-    public void setZip(String zip) {
-        this.zip = zip;
     }
 
     @JsonProperty

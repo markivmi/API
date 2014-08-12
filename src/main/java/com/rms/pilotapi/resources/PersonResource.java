@@ -24,7 +24,7 @@ public class PersonResource {
     @GET
     @Timed
     @Path("/getAuthPerson/{id}")
-    public Person getAuthPerson(@PathParam("id")int id, @Auth Person user) {
+    public Person getAuthPerson(@PathParam("id") int id, @Auth Boolean isAuthenticated) {
 
         /* use HTTP header:
         Authorization : Basic dGVzdDpzZWNyZXQ=
@@ -33,7 +33,7 @@ public class PersonResource {
         Authorization : Basic dGVzdDoxMjM=
          */
 
-        if(user.getName().isEmpty()) {
+        if (!isAuthenticated) {
             return null;
         }
 

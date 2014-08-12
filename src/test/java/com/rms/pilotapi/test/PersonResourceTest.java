@@ -18,12 +18,6 @@ import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 public class PersonResourceTest {
-    private static final PersonDao personDao = mock(PersonDao.class);
-
-    @ClassRule
-    public static final ResourceTestRule resources = ResourceTestRule.builder()
-            .addResource(new PersonResource(personDao))
-            .build();
 
     private static Person getDummyPerson() {
         Coordinates coordinates = new Coordinates();
@@ -45,7 +39,13 @@ public class PersonResourceTest {
         return person;
     }
 
+    private static final PersonDao personDao = mock(PersonDao.class);
     private final Person person = getDummyPerson();
+
+    @ClassRule
+    public static final ResourceTestRule resources = ResourceTestRule.builder()
+            .addResource(new PersonResource(personDao))
+            .build();
 
     @Before
     public void setup() {

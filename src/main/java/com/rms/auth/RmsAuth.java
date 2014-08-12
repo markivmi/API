@@ -5,9 +5,6 @@ import com.rms.pilotapi.core.Person;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
 
-/**
- * Created by Vinay on 8/4/2014.
- */
 public interface RmsAuth<T> extends Authenticator<T, Person> {
     @Override
     public Optional<Person> authenticate(T authenticator) throws AuthenticationException;

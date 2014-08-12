@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import static io.dropwizard.testing.FixtureHelpers.fixture;
 import static org.fest.assertions.Assertions.assertThat;
 
+
 public class PersonTest {
 
     private static ObjectMapper MAPPER;
@@ -50,12 +51,13 @@ public class PersonTest {
 
     @Test
     public void serializesToJSON() throws Exception {
-        assertThat(MAPPER.writeValueAsString(person)).isEqualTo(fixture("fixtures/Person.json"));
+        assertThat(MAPPER.writeValueAsString(person)).isEqualTo(fixture("fixtures/person.json"));
     }
 
+
     //TODO
-    //@Test
-    public void deserializesFromJSON() throws Exception {
-        assertThat(MAPPER.readValue(fixture("fixtures/person.json"), Person.class)).isEqualTo(person);
-    }
+//    @Test
+//    public void deserializesFromJSON() throws Exception {
+//        assertThat(MAPPER.readValue(fixture("fixtures/person.json"), Person.class)).isEqualTo(person);
+//    }
 }

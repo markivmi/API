@@ -1,6 +1,7 @@
 package com.rms.pilotapi;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.rms.auth.BasicAuth;
@@ -47,6 +48,7 @@ public class PilotAPIApplication extends Application<PilotAPIConfiguration> {
 
         //Set datetime serialization format to ISO-8601
         environment.getObjectMapper().configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        environment.getObjectMapper().registerModule(new JodaModule());
 
         //Register basic authenticator
         environment.jersey().register(new BasicAuthProvider<Person>(new BasicAuth(), "Authentication"));
