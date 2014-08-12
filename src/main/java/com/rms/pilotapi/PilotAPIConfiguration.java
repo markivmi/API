@@ -2,7 +2,6 @@ package com.rms.pilotapi;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
-import io.dropwizard.validation.Validated;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.Valid;

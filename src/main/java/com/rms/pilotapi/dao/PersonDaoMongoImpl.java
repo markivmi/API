@@ -43,23 +43,4 @@ public class PersonDaoMongoImpl implements PersonDao {
         personCollection.removeById(id.toString());
         return true;
     }
-
-//    private Person getDummyPerson() {
-//        Coordinates coordinates = new Coordinates();
-//        coordinates.setLatitude("23N");
-//        coordinates.setLongitude("46S");
-//
-//        Address address = new Address();
-//        address.setCity("Fremont");
-//        address.setStreet("Mowry Blvd");
-//        address.setZip("94538");
-//        address.setCoordinates(coordinates);
-//
-//        Person person = new Person();
-//        person.setName("John Doe");
-//        person.setBirthDateTime(new DateTime("2012-11-21T13:01:33.568Z"));
-//        person.setAge(10);
-//        person.setAddress(address);
-//        return person;
-//    }
 }

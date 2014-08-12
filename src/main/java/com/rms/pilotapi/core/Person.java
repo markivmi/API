@@ -4,19 +4,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.DateTime;
 
+import javax.validation.constraints.NotNull;
+
 public class Person {
     private int id;
     @NotEmpty
     private String name;
-    @NotEmpty
+    @NotNull
     private int age;
     private DateTime birthDateTime;
     private Address address;
 
-
-
-    public Person(){
+    public Person() {
     }
+
     public Person(String name) {
         this.name = name;
     }

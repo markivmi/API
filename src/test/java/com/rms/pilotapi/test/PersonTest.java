@@ -5,21 +5,14 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.rms.pilotapi.core.Address;
 import com.rms.pilotapi.core.Coordinates;
 import com.rms.pilotapi.core.Person;
-import com.rms.pilotapi.dao.PersonDao;
-import com.rms.pilotapi.dao.PersonDaoMongoImpl;
-import com.rms.pilotapi.resources.PersonResource;
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.WebResource;
 import io.dropwizard.jackson.Jackson;
-import io.dropwizard.testing.junit.ResourceTestRule;
 import org.joda.time.DateTime;
 import org.junit.BeforeClass;
-import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import static io.dropwizard.testing.FixtureHelpers.fixture;
 import static org.fest.assertions.Assertions.assertThat;
-import org.slf4j.*;
-import static org.mockito.Mockito.*;
-
 
 public class PersonTest {
 
@@ -29,7 +22,7 @@ public class PersonTest {
 
     @BeforeClass
     public static void setup() {
-        lOGGER.info("Persion Test Started");
+        lOGGER.info("Person Test Started");
         MAPPER = Jackson.newObjectMapper();
         MAPPER.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
@@ -52,12 +45,9 @@ public class PersonTest {
         lOGGER.info("Person Test End");
     }
 
-    @Test
     public void serializesToJSON() throws Exception {
-        assertThat(MAPPER.writeValueAsString(person)).isEqualTo(fixture("fixtures/person.json"));
+        assertThat(MAPPER.writeValueAsString(person)).isEqualTo(fixture("fixtures/Person.json"));
     }
-
-
 
     //TODO
 //    @Test

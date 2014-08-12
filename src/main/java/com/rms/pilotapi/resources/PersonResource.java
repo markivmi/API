@@ -43,7 +43,7 @@ public class PersonResource {
     @GET
     @Timed
     @Path("/{id}")
-    public Person getPerson(@PathParam("id") int id) {
+    public Person getPerson(@PathParam("id") Integer id) {
         return personDao.getPerson(id);
     }
 
@@ -56,14 +56,14 @@ public class PersonResource {
     @PUT
     @Timed
     @Path("/{id}")
-    public Person updatePerson(@PathParam("id") int id, @Valid Person person) {
+    public Person updatePerson(@PathParam("id") Integer id, @Valid Person person) {
         return personDao.updatePerson(id, person);
     }
 
     @DELETE
     @Timed
     @Path("/{id}")
-    public boolean deletePerson(@PathParam("id") int id) {
+    public boolean deletePerson(@PathParam("id") Integer id) {
         return personDao.deletePerson(id);
     }
 }

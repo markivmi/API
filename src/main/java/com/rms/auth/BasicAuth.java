@@ -11,7 +11,7 @@ public class BasicAuth implements RmsAuth<BasicCredentials> {
     @Override
     public Optional<Person> authenticate(BasicCredentials basicCredentials) throws AuthenticationException {
         String pw = basicCredentials.getPassword();
-        if(pw.equals("secret")) {
+        if (pw.equals("secret")) {
             return Optional.of(new Person(basicCredentials.getUsername()));
         }
         return Optional.absent();
