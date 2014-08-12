@@ -14,7 +14,34 @@ public class Person {
     @NotEmpty
     private String name;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Person)) return false;
+
+        Person person = (Person) o;
+
+        if (age != person.age) return false;
+        if (id != person.id) return false;
+        if (!address.equals(person.address)) return false;
+        if (!birthDateTime.equals(person.birthDateTime)) return false;
+        if (!name.equals(person.name)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + name.hashCode();
+        result = 31 * result + age;
+        result = 31 * result + birthDateTime.hashCode();
+        result = 31 * result + address.hashCode();
+        return result;
+    }
+
     @NotEmpty
+
     private int age;
 
     private DateTime birthDateTime;
