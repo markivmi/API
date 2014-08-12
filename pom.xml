@@ -21,11 +21,6 @@
         </dependency>
         <dependency>
             <groupId>io.dropwizard</groupId>
-            <artifactId>dropwizard-db</artifactId>
-            <version>${dropwizard.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-jackson</artifactId>
             <version>${dropwizard.version}</version>
         </dependency>
@@ -45,28 +40,9 @@
             <version>${dropwizard.version}</version>
         </dependency>
         <dependency>
-            <groupId>io.dropwizard</groupId>
-            <artifactId>dropwizard-jersey</artifactId>
-            <version>${dropwizard.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.easytesting</groupId>
             <artifactId>fest-assert</artifactId>
             <version>1.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
         </dependency>
         <dependency>
             <groupId>com.google.inject</groupId>
