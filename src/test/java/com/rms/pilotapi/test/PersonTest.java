@@ -56,8 +56,9 @@ public class PersonTest {
 
 
     //TODO
-//    @Test
-//    public void deserializesFromJSON() throws Exception {
-//        assertThat(MAPPER.readValue(fixture("fixtures/person.json"), Person.class)).isEqualTo(person);
-//    }
+    @Test
+    public void deserialiseFromJSON() throws Exception {
+        Person p = MAPPER.readValue(fixture("fixtures/person.json"), Person.class);
+        assert (p.equals(person));
+    }
 }
