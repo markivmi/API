@@ -16,7 +16,6 @@ import static org.mockito.Mockito.*;
 public class PersonResourceTest {
 
 
-
     private static final PersonDao personDao = mock(PersonDao.class);
     private final Person person = TestUtils.getDummyPerson(123);
 

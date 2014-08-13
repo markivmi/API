@@ -17,7 +17,7 @@ public class PersonApplicationTest {
     private static final PersonDao personDao = mock(PersonDao.class);
     private final Person person = TestUtils.getDummyPerson(123);
 
- //   @ClassRule
+    //   @ClassRule
     public static final ResourceTestRule resources = ResourceTestRule.builder()
             .addResource(new PersonResource(personDao))
             .build();
@@ -30,28 +30,28 @@ public class PersonApplicationTest {
         when(personDao.deletePerson(anyInt())).thenReturn(true);*/
     }
 
- //   @Test
+    //   @Test
     public void testGetPerson() {
         Person personFromAPI = resources.client().resource("/persons/123").get(Person.class);
         assertThat(personFromAPI.equals(person));
         verify(personDao).getPerson(123);
     }
 
- //   @Test
+    //   @Test
     public void testCreatePerson() throws Exception {
         Person personFromAPI = resources.client().resource("/persons").type(MediaType.APPLICATION_JSON_TYPE).post(Person.class, person);
         assertThat(personFromAPI.equals(person));
         verify(personDao).createPerson(person);
     }
 
- //   @Test
+    //   @Test
     public void testUpdatePerson() throws Exception {
         Person personFromAPI = resources.client().resource("/persons/123").type(MediaType.APPLICATION_JSON_TYPE).put(Person.class, person);
         assertThat(personFromAPI.equals(person));
         verify(personDao).updatePerson(123, person);
     }
 
-  //  @Test
+    //  @Test
     public void testDeletePerson() throws Exception {
         Boolean booleanFromAPI = resources.client().resource("/persons/123").delete(Boolean.class);
         assertThat(booleanFromAPI);
