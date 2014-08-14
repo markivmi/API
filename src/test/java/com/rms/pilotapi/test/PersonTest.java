@@ -14,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static io.dropwizard.testing.FixtureHelpers.fixture;
-import static org.fest.assertions.Assertions.assertThat;
 
 
 public class PersonTest {
@@ -51,7 +50,7 @@ public class PersonTest {
 
     @Test
     public void serializesToJSON() throws Exception {
-        assertThat(MAPPER.writeValueAsString(person)).isEqualTo(fixture("fixtures/person.json"));
+        assert(MAPPER.writeValueAsString(person).equalsIgnoreCase(fixture("fixtures/person.json")));
     }
 
     @Test

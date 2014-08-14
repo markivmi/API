@@ -16,6 +16,16 @@ public class Coordinates {
         this.latitude = latitude;
     }
 
+    @JsonProperty
+    public String getLongitude() {
+        return longitude;
+    }
+
+    @JsonProperty
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -35,15 +45,4 @@ public class Coordinates {
         result = 31 * result + (longitude != null ? longitude.hashCode() : 0);
         return result;
     }
-
-    @JsonProperty
-    public String getLongitude() {
-        return longitude;
-    }
-
-    @JsonProperty
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
-
 }

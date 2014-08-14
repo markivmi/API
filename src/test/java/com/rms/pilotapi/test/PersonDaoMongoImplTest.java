@@ -4,21 +4,46 @@ import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.rms.pilotapi.core.Person;
 import com.rms.pilotapi.dao.PersonDaoMongoImpl;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import de.flapdoodle.embed.mongo.MongodExecutable;
+import de.flapdoodle.embed.mongo.MongodProcess;
+import de.flapdoodle.embed.mongo.MongodStarter;
+import de.flapdoodle.embed.mongo.config.IMongodConfig;
+import de.flapdoodle.embed.mongo.config.MongodConfigBuilder;
+import de.flapdoodle.embed.mongo.config.Net;
+import de.flapdoodle.embed.mongo.distribution.Version;
+import org.junit.*;
 
-import java.net.UnknownHostException;
+import java.io.IOException;
 
 public class PersonDaoMongoImplTest {
 
-    public PersonDaoMongoImpl personDao;
-    MongoClient mongoClient;
-    DB mongoDb;
+    private static final String MONGO_HOST = "localhost";
+    private static final int MONGO_PORT = 27777;
+    private static final String DB_NAME = "local";
 
-    public PersonDaoMongoImplTest() throws UnknownHostException {
-        mongoClient = new MongoClient("localhost", 27017);
-        mongoDb = mongoClient.getDB("local");
+    private static MongodExecutable mongodExecutable;
+    private static MongodProcess mongodProcess;
+    private static DB mongoDb;
+
+    public PersonDaoMongoImpl personDao;
+
+    @BeforeClass
+    public static void setupDB() throws IOException {
+        MongodStarter runtime = MongodStarter.getDefaultInstance();
+        IMongodConfig config = new MongodConfigBuilder()
+                .version(Version.Main.PRODUCTION)
+                .net(new Net(MONGO_PORT, true))
+                .build();
+        mongodExecutable = runtime.prepare(config);
+        mongodProcess = mongodExecutable.start();
+        MongoClient mongoClient = new MongoClient(MONGO_HOST, MONGO_PORT);
+        mongoDb = mongoClient.getDB(DB_NAME);
+    }
+
+    @AfterClass
+    public static void closeDB() {
+        mongodProcess.stop();
+        mongodExecutable.stop();
     }
 
     @Before

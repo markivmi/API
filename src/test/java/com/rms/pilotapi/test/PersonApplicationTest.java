@@ -12,7 +12,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class PersonApplicationTest {
-
+/*
 
     private static final PersonDao personDao = mock(PersonDao.class);
     private final Person person = TestUtils.getDummyPerson(123);
@@ -22,12 +22,12 @@ public class PersonApplicationTest {
             .addResource(new PersonResource(personDao))
             .build();
 
-    /*@Before*/
+    *//*@Before*//*
     public void setup() {
-       /* when(personDao.getPerson(anyInt())).thenReturn(person);
+       *//* when(personDao.getPerson(anyInt())).thenReturn(person);
         when(personDao.createPerson(any(Person.class))).thenReturn(person);
         when(personDao.updatePerson(anyInt(), any(Person.class))).thenReturn(person);
-        when(personDao.deletePerson(anyInt())).thenReturn(true);*/
+        when(personDao.deletePerson(anyInt())).thenReturn(true);*//*
     }
 
  //   @Test
@@ -56,5 +56,5 @@ public class PersonApplicationTest {
         Boolean booleanFromAPI = resources.client().resource("/persons/123").delete(Boolean.class);
         assertThat(booleanFromAPI);
         verify(personDao).deletePerson(123);
-    }
+    }*/
 }

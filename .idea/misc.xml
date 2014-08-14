@@ -13,7 +13,7 @@
     <option name="Settings File" value="C:\Users\vpandey\.m2\settings.xml" />
     <option name="mavenCommandLineParams" value="" />
     <option name="vmOptions" value="" />
-    <option name="useMavenEmbedder" value="false" />
+    <option name="useMavenEmbedder" value="true" />
     <option name="useFilter" value="false" />
     <option name="Batch Mode" value="false" />
     <option name="Check Plugin Updates" value="false" />
