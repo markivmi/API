@@ -4,7 +4,7 @@ import com.google.common.base.Optional;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.basic.BasicCredentials;
 
-public class BasicAuthentication implements Authentication<BasicCredentials> {
+public class BasicAuthenticator implements PilotAuthenticator<BasicCredentials> {
 
     @Override
     public Optional<Boolean> authenticate(BasicCredentials basicCredentials) throws AuthenticationException {

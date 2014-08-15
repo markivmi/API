@@ -1,16 +1,5 @@
 package com.rms.pilotapi.test;
 
-import com.rms.pilotapi.core.Person;
-import com.rms.pilotapi.dao.PersonDao;
-import com.rms.pilotapi.resources.PersonResource;
-import io.dropwizard.testing.junit.ResourceTestRule;
-
-import javax.ws.rs.core.MediaType;
-
-import static org.fest.assertions.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
 public class PersonApplicationTest {
 /*
 

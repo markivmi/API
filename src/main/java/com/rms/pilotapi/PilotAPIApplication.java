@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.rms.auth.BasicAuthentication;
+import com.rms.auth.BasicAuthenticator;
 import com.rms.pilotapi.dao.PersonDao;
 import com.rms.pilotapi.health.MongoHealthCheck;
 import com.rms.pilotapi.resources.PersonResource;
@@ -50,6 +50,6 @@ public class PilotAPIApplication extends Application<PilotAPIConfiguration> {
         environment.getObjectMapper().registerModule(new JodaModule());
 
         //Register basic authenticator
-        environment.jersey().register(new BasicAuthProvider<Boolean>(new BasicAuthentication(), "Authentication"));
+        environment.jersey().register(new BasicAuthProvider<Boolean>(new BasicAuthenticator(), "PilotAuthenticator"));
     }
 }

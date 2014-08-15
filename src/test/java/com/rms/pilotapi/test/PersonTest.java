@@ -50,7 +50,7 @@ public class PersonTest {
 
     @Test
     public void serializesToJSON() throws Exception {
-        assert(MAPPER.writeValueAsString(person).equalsIgnoreCase(fixture("fixtures/person.json")));
+        assert (MAPPER.writeValueAsString(person).equalsIgnoreCase(fixture("fixtures/person.json")));
     }
 
     @Test

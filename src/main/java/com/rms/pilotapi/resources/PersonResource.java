@@ -9,6 +9,7 @@ import io.dropwizard.auth.Auth;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("/persons")
 @Produces(MediaType.APPLICATION_JSON)
@@ -24,7 +25,7 @@ public class PersonResource {
     @GET
     @Timed
     @Path("/getAuthPerson/{id}")
-    public Person getAuthPerson(@PathParam("id") int id, @Auth Boolean isAuthenticated) {
+    public Person getAuthPerson(@PathParam("id") int id, @Auth Boolean isAuthenticated) throws WebApplicationException {
 
         /* use HTTP header:
         Authorization : Basic dGVzdDpzZWNyZXQ=
@@ -34,7 +35,7 @@ public class PersonResource {
          */
 
         if (!isAuthenticated) {
-            return null;
+            throw new WebApplicationException(Response.Status.UNAUTHORIZED);
         }
 
         return personDao.getPerson(id);
