@@ -5,6 +5,8 @@ import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.rms.auth.BasicAuthenticator;
+import com.rms.interceptor.PilotInterceptor;
+import com.rms.interceptor.ResponseFilter;
 import com.rms.pilotapi.dao.PersonDao;
 import com.rms.pilotapi.health.MongoHealthCheck;
 import com.rms.pilotapi.resources.PersonResource;
@@ -51,5 +53,11 @@ public class PilotAPIApplication extends Application<PilotAPIConfiguration> {
 
         //Register basic authenticator
         environment.jersey().register(new BasicAuthProvider<>(new BasicAuthenticator(), "PilotAuthenticator"));
+
+        //Register request interceptor/filter
+        environment.jersey().getResourceConfig().getContainerRequestFilters().add(new PilotInterceptor());
+
+        //Register response interceptor/filter
+        environment.jersey().getResourceConfig().getContainerResponseFilters().add(new ResponseFilter());
     }
 }
