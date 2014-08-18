@@ -86,5 +86,4 @@ public class PersonDaoMongoImplTest {
         long id = person.getId();
         assert (personDao.deletePerson(id));
     }
-
 }

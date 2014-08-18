@@ -1,1 +1,1 @@
-{"id":123,"name":"John Doe","age":10,"birthDateTime":"2012-11-21T13:01:33.568Z","address":{"street":"Mowry Blvd","city":"Fremont","zip":"94538","coordinates":{"latitude":"23N","longitude":"46S"}}}
+{"id":123,"name":"John Doe","age":20,"birthDateTime":"2012-11-21T13:01:33.568Z","address":{"street":"Mowry Blvd","city":"Fremont","zip":94538,"coordinates":{"latitude":"23N","longitude":"46S"}}}

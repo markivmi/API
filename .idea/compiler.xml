@@ -25,7 +25,9 @@
         <module name="pilotapi" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.7" />
+    <bytecodeTargetLevel target="1.7">
+      <module name="pilotapi" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
 
