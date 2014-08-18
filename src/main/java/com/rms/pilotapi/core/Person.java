@@ -7,7 +7,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.DateTime;
 import org.mongojack.Id;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Past;
 
 public class Person {
     @Id
@@ -15,6 +16,14 @@ public class Person {
 
     @NotEmpty
     private String name;
+
+    @Min(18)
+    private int age;
+
+    @Past
+    private DateTime birthDateTime;
+
+    private Address address;
 
     @Override
     public boolean equals(Object o) {
@@ -42,18 +51,7 @@ public class Person {
         return result;
     }
 
-    @NotNull
-    private int age;
-
-    private DateTime birthDateTime;
-
-    private Address address;
-
     public Person() {
-    }
-
-    public Person(String name) {
-        this.name = name;
     }
 
     @Id
@@ -99,7 +97,7 @@ public class Person {
         this.birthDateTime = birthDateTime;
     }
 
-    @JsonProperty
+    @JsonProperty()
     public Address getAddress() {
         return address;
     }

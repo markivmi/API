@@ -4,7 +4,7 @@ public class PersonApplicationTest {
 /*
 
     private static final PersonDao personDao = mock(PersonDao.class);
-    private final Person person = TestUtils.getDummyPerson(123);
+    private final Person inputPerson = TestUtils.getRightDummyPerson(123);
 
     //   @ClassRule
     public static final ResourceTestRule resources = ResourceTestRule.builder()
@@ -13,31 +13,31 @@ public class PersonApplicationTest {
 
     *//*@Before*//*
     public void setup() {
-       *//* when(personDao.getPerson(anyInt())).thenReturn(person);
-        when(personDao.createPerson(any(Person.class))).thenReturn(person);
-        when(personDao.updatePerson(anyInt(), any(Person.class))).thenReturn(person);
+       *//* when(personDao.getPerson(anyInt())).thenReturn(inputPerson);
+        when(personDao.createPerson(any(Person.class))).thenReturn(inputPerson);
+        when(personDao.updatePerson(anyInt(), any(Person.class))).thenReturn(inputPerson);
         when(personDao.deletePerson(anyInt())).thenReturn(true);*//*
     }
 
     //   @Test
     public void testGetPerson() {
         Person personFromAPI = resources.client().resource("/persons/123").get(Person.class);
-        assertThat(personFromAPI.equals(person));
+        assertThat(personFromAPI.equals(inputPerson));
         verify(personDao).getPerson(123);
     }
 
     //   @Test
     public void testCreatePerson() throws Exception {
-        Person personFromAPI = resources.client().resource("/persons").type(MediaType.APPLICATION_JSON_TYPE).post(Person.class, person);
-        assertThat(personFromAPI.equals(person));
-        verify(personDao).createPerson(person);
+        Person personFromAPI = resources.client().resource("/persons").type(MediaType.APPLICATION_JSON_TYPE).post(Person.class, inputPerson);
+        assertThat(personFromAPI.equals(inputPerson));
+        verify(personDao).createPerson(inputPerson);
     }
 
     //   @Test
     public void testUpdatePerson() throws Exception {
-        Person personFromAPI = resources.client().resource("/persons/123").type(MediaType.APPLICATION_JSON_TYPE).put(Person.class, person);
-        assertThat(personFromAPI.equals(person));
-        verify(personDao).updatePerson(123, person);
+        Person personFromAPI = resources.client().resource("/persons/123").type(MediaType.APPLICATION_JSON_TYPE).put(Person.class, inputPerson);
+        assertThat(personFromAPI.equals(inputPerson));
+        verify(personDao).updatePerson(123, inputPerson);
     }
 
     //  @Test

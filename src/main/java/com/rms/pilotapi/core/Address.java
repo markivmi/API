@@ -2,10 +2,20 @@ package com.rms.pilotapi.core;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+
 public class Address {
+
+    @NotNull
     private String street;
+
+    @NotNull
     private String city;
-    private String zip;
+
+    @Max(99999)
+    private int zip;
+
     private Coordinates coordinates;
 
     @JsonProperty
@@ -29,14 +39,12 @@ public class Address {
     }
 
     @JsonProperty
-
-    public String getZip() {
+    public int getZip() {
         return zip;
     }
 
     @JsonProperty
-
-    public void setZip(String zip) {
+    public void setZip(int zip) {
         this.zip = zip;
     }
 
@@ -47,18 +55,19 @@ public class Address {
 
         Address address = (Address) o;
 
-        if (city != null ? !city.equals(address.city) : address.city != null) return false;
+        if (zip != address.zip) return false;
+        if (!city.equals(address.city)) return false;
         if (coordinates != null ? !coordinates.equals(address.coordinates) : address.coordinates != null) return false;
-        if (street != null ? !street.equals(address.street) : address.street != null) return false;
-        return !(zip != null ? !zip.equals(address.zip) : address.zip != null);
+        if (!street.equals(address.street)) return false;
 
+        return true;
     }
 
     @Override
     public int hashCode() {
-        int result = street != null ? street.hashCode() : 0;
-        result = 31 * result + (city != null ? city.hashCode() : 0);
-        result = 31 * result + (zip != null ? zip.hashCode() : 0);
+        int result = street.hashCode();
+        result = 31 * result + city.hashCode();
+        result = 31 * result + zip;
         result = 31 * result + (coordinates != null ? coordinates.hashCode() : 0);
         return result;
     }

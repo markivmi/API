@@ -11,6 +11,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+//TODO: put response codes in response filters
+
 @Path("/persons")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -38,33 +40,71 @@ public class PersonResource {
             throw new WebApplicationException(Response.Status.UNAUTHORIZED);
         }
 
-        return personDao.getPerson(id);
+        Person output = personDao.getPerson(id);
+
+        return output;
     }
 
     @GET
     @Timed
     @Path("/{id}")
     public Person getPerson(@PathParam("id") Integer id) {
-        return personDao.getPerson(id);
+        Person output = personDao.getPerson(id);
+
+        return output;
     }
 
     @POST
     @Timed
     public Person createPerson(@Valid Person person) {
-        return personDao.createPerson(person);
+        Person output;
+
+        try {
+            output =  personDao.createPerson(person);
+        } catch (Exception e) {
+            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        }
+
+        if (output == null) {
+            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        }
+
+        return output;
     }
 
     @PUT
     @Timed
     @Path("/{id}")
     public Person updatePerson(@PathParam("id") Integer id, @Valid Person person) {
-        return personDao.updatePerson(id, person);
+        Person output;
+        try {
+            output = personDao.updatePerson(id, person);
+        } catch (Exception e) {
+            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        }
+
+        if (output == null) {
+            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        }
+
+        return output;
     }
 
     @DELETE
     @Timed
     @Path("/{id}")
     public boolean deletePerson(@PathParam("id") Integer id) {
-        return personDao.deletePerson(id);
+        boolean output;
+        try {
+            output = personDao.deletePerson(id);
+        } catch (Exception e) {
+            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+        }
+
+        if (!output) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+
+        return output;
     }
 }

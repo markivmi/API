@@ -50,6 +50,6 @@ public class PilotAPIApplication extends Application<PilotAPIConfiguration> {
         environment.getObjectMapper().registerModule(new JodaModule());
 
         //Register basic authenticator
-        environment.jersey().register(new BasicAuthProvider<Boolean>(new BasicAuthenticator(), "PilotAuthenticator"));
+        environment.jersey().register(new BasicAuthProvider<>(new BasicAuthenticator(), "PilotAuthenticator"));
     }
 }

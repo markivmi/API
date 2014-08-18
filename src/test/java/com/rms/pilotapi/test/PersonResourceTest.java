@@ -1,6 +1,7 @@
 package com.rms.pilotapi.test;
 
 import com.rms.auth.BasicAuthenticator;
+import com.rms.interceptor.PilotInterceptor;
 import com.rms.pilotapi.core.Person;
 import com.rms.pilotapi.dao.PersonDao;
 import com.rms.pilotapi.resources.PersonResource;
@@ -20,12 +21,13 @@ import static org.mockito.Mockito.*;
 public class PersonResourceTest {
 
     private static final PersonDao personDao = mock(PersonDao.class);
-    private final Person person = TestUtils.getDummyPerson(123);
+    private final Person person = TestUtils.getRightDummyPerson(123);
 
     @ClassRule
     public static final ResourceTestRule resources = ResourceTestRule.builder()
             .addResource(new PersonResource(personDao))
             .addProvider(new BasicAuthProvider<>(new BasicAuthenticator(), "TestAuthenticator"))
+            .addProvider(new PilotInterceptor())
             .build();
 
     @Before

@@ -58,14 +58,14 @@ public class PersonDaoMongoImplTest {
 
     @Test
     public void CreatePersonTest() {
-        Person person = TestUtils.getDummyPerson(0);
+        Person person = TestUtils.getRightDummyPerson(0);
         Person p = personDao.createPerson(person);
         assert (p.getId() > 0);
     }
 
     @Test
     public void UpdatePersonTest() {
-        Person person = personDao.createPerson(TestUtils.getDummyPerson(0));
+        Person person = personDao.createPerson(TestUtils.getRightDummyPerson(0));
         long id = person.getId();
         person.setName("John Doe updated");
         Person p = personDao.updatePerson(id, person);
@@ -74,7 +74,7 @@ public class PersonDaoMongoImplTest {
 
     @Test
     public void GetPersonTest() {
-        Person person = personDao.createPerson(TestUtils.getDummyPerson(0));
+        Person person = personDao.createPerson(TestUtils.getRightDummyPerson(0));
         long id = person.getId();
         Person p = personDao.getPerson(id);
         assert (p != null);
@@ -82,7 +82,7 @@ public class PersonDaoMongoImplTest {
 
     @Test
     public void DeletePersonTest() {
-        Person person = personDao.createPerson(TestUtils.getDummyPerson(0));
+        Person person = personDao.createPerson(TestUtils.getRightDummyPerson(0));
         long id = person.getId();
         assert (personDao.deletePerson(id));
     }
