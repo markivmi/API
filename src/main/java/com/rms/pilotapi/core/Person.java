@@ -36,9 +36,8 @@ public class Person {
         if (id != person.id) return false;
         if (!address.equals(person.address)) return false;
         if (!birthDateTime.equals(person.birthDateTime)) return false;
-        if (!name.equals(person.name)) return false;
+        return name.equals(person.name);
 
-        return true;
     }
 
     @Override

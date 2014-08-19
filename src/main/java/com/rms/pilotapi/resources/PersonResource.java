@@ -40,18 +40,15 @@ public class PersonResource {
             throw new WebApplicationException(Response.Status.UNAUTHORIZED);
         }
 
-        Person output = personDao.getPerson(id);
-
-        return output;
+        return personDao.getPerson(id);
     }
 
     @GET
     @Timed
     @Path("/{id}")
     public Person getPerson(@PathParam("id") Integer id) {
-        Person output = personDao.getPerson(id);
 
-        return output;
+        return personDao.getPerson(id);
     }
 
     @POST
@@ -105,6 +102,6 @@ public class PersonResource {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
 
-        return output;
+        return true;
     }
 }

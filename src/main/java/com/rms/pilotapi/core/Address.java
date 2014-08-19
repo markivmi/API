@@ -58,9 +58,8 @@ public class Address {
         if (zip != address.zip) return false;
         if (!city.equals(address.city)) return false;
         if (coordinates != null ? !coordinates.equals(address.coordinates) : address.coordinates != null) return false;
-        if (!street.equals(address.street)) return false;
+        return street.equals(address.street);
 
-        return true;
     }
 
     @Override

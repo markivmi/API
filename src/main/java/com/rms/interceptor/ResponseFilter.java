@@ -34,7 +34,7 @@ public class ResponseFilter implements ContainerResponseFilter {
 
         Object entity = containerResponse.getOriginalEntity();
 
-        Response.ResponseBuilder responseBuilder = response.fromResponse(response);
+        Response.ResponseBuilder responseBuilder = Response.fromResponse(response);
 
         switch (methodType) {
 
