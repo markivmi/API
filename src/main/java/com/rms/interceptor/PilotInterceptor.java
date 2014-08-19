@@ -78,7 +78,7 @@ public class PilotInterceptor implements ContainerRequestFilter {
             BasicCredentials basicCredentials = new BasicCredentials(values[0], values[1]);
             com.google.common.base.Optional<Boolean> authenticated = new BasicAuthenticator().authenticate(basicCredentials);
 
-            if(!authenticated.isPresent() || authenticated.get()) {
+            if(!authenticated.isPresent() || !authenticated.get()) {
                 throw new WebApplicationException(Response.Status.UNAUTHORIZED);
             }
             return;

@@ -1,29 +1,38 @@
 package com.rms.pilotapi.test;
 
-import com.mongodb.DB;
 import com.mongodb.MongoClient;
+import com.rms.common.Functor;
 import com.rms.pilotapi.core.Person;
 import com.rms.pilotapi.dao.PersonDaoMongoImpl;
-import de.flapdoodle.embed.mongo.MongodExecutable;
-import de.flapdoodle.embed.mongo.MongodProcess;
 import de.flapdoodle.embed.mongo.MongodStarter;
 import de.flapdoodle.embed.mongo.config.IMongodConfig;
 import de.flapdoodle.embed.mongo.config.MongodConfigBuilder;
 import de.flapdoodle.embed.mongo.config.Net;
 import de.flapdoodle.embed.mongo.distribution.Version;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.mongojack.JacksonDBCollection;
+import org.mongojack.WriteResult;
 
 import java.io.IOException;
+
+import static org.mockito.Mockito.*;
 
 public class PersonDaoMongoImplTest {
 
     private static final String MONGO_HOST = "localhost";
     private static final int MONGO_PORT = 27777;
     private static final String DB_NAME = "local";
+    private static Functor<String, JacksonDBCollection<Person, Long>> getCollection;
+    private static long count = 1;
 
-    private static MongodExecutable mongodExecutable;
-    private static MongodProcess mongodProcess;
-    private static DB mongoDb;
+
+    private static JacksonDBCollection<Person, Long> mockCollection = mock(JacksonDBCollection.class);
+    private static WriteResult mockWriteResult = mock(WriteResult.class);
+    private static Person outputPerson = TestUtils.getRightDummyPerson(123);
+    private static Person inputPerson = TestUtils.getRightDummyPerson(0);
 
     public PersonDaoMongoImpl personDao;
 
@@ -34,26 +43,26 @@ public class PersonDaoMongoImplTest {
                 .version(Version.Main.PRODUCTION)
                 .net(new Net(MONGO_PORT, true))
                 .build();
-        mongodExecutable = runtime.prepare(config);
-        mongodProcess = mongodExecutable.start();
         MongoClient mongoClient = new MongoClient(MONGO_HOST, MONGO_PORT);
-        mongoDb = mongoClient.getDB(DB_NAME);
-    }
-
-    @AfterClass
-    public static void closeDB() {
-        mongodProcess.stop();
-        mongodExecutable.stop();
+        getCollection = (String collectionName) -> mockCollection;
     }
 
     @Before
     public void SetupDao() {
-        personDao = new PersonDaoMongoImpl(mongoDb);
+        personDao = new PersonDaoMongoImpl(getCollection);
+        when(mockCollection.getCount()).thenReturn(count);
+        when(mockCollection.findOneById(anyLong())).thenReturn(outputPerson);
+        when(mockCollection.insert(any(Person.class))).thenReturn(mockWriteResult);
+        when(mockCollection.updateById(anyLong(), any(Person.class))).thenReturn(mockWriteResult);
+        when(mockCollection.removeById(anyLong())).thenReturn(mockWriteResult);
+
+        doReturn(null).when(mockWriteResult).getError();
+        doReturn(count).when(mockWriteResult).getSavedId();
     }
 
     @After
     public void AfterTestRun() {
-        personDao = null;
+        ++count;
     }
 
     @Test

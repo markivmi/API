@@ -1,5 +1,6 @@
 package com.rms.interceptor;
 
+import com.rms.pilotapi.core.Person;
 import com.sun.jersey.spi.container.ContainerRequest;
 import com.sun.jersey.spi.container.ContainerResponse;
 import com.sun.jersey.spi.container.ContainerResponseFilter;
@@ -40,15 +41,40 @@ public class ResponseFilter implements ContainerResponseFilter {
             case NONE:
                 containerResponse.setStatus(INTERNAL_SERVER_ERROR);
             case GET:
+                if(entity != null && entity instanceof Person) {
+                    responseBuilder.entity(entity);
+                    responseBuilder.status(OK);
+                } else {
+                    responseBuilder.status(NOT_FOUND);
+                }
                 break;
             case PUT:
+                if(entity != null && entity instanceof Person) {
+                    responseBuilder.entity(entity);
+                    responseBuilder.status(OK);
+                } else {
+                    responseBuilder.status(NOT_MODIFIED);
+                }
                 break;
             case POST:
+                if(entity != null && entity instanceof Person) {
+                    responseBuilder.entity(entity);
+                    responseBuilder.status(CREATED);
+                } else {
+                    responseBuilder.status(INTERNAL_SERVER_ERROR);
+                }
                 break;
             case DELETE:
+                if(entity != null && entity instanceof Person) {
+                    responseBuilder.entity(entity);
+                    responseBuilder.status(NO_CONTENT);
+                } else {
+                    responseBuilder.status(INTERNAL_SERVER_ERROR);
+                }
                 break;
         }
 
+        containerResponse.setResponse(responseBuilder.build());
         return containerResponse;
     }
 }

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.google.inject.Inject;
-import com.mongodb.DB;
+import com.rms.common.Functor;
 import com.rms.pilotapi.core.Person;
 import org.mongojack.JacksonDBCollection;
 import org.mongojack.WriteResult;
@@ -15,15 +15,12 @@ public class PersonDaoMongoImpl implements PersonDao {
     JacksonDBCollection<Person, Long> personCollection;
 
     @Inject
-    public PersonDaoMongoImpl(DB mongoDb) {
+    public PersonDaoMongoImpl(Functor<String, JacksonDBCollection<Person, Long>> getJacksonCollection) {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JodaModule());
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         MongoJackModule.configure(objectMapper);
-        personCollection = JacksonDBCollection.wrap(
-                mongoDb.getCollection("personCollection"),
-                Person.class,
-                Long.class);
+        personCollection = getJacksonCollection.apply("personCollection");
     }
 
     private long getNextId() {
@@ -46,7 +43,7 @@ public class PersonDaoMongoImpl implements PersonDao {
     @Override
     public Person updatePerson(long id, Person person) {
         WriteResult wr = personCollection.updateById(id, person);
-        if (wr.getError() == null || wr.getError().isEmpty()) {
+        if (wr.getError() == null) {
             return person;
         }
         return null;
@@ -55,6 +52,6 @@ public class PersonDaoMongoImpl implements PersonDao {
     @Override
     public boolean deletePerson(long id) {
         WriteResult wr = personCollection.removeById(id);
-        return (wr.getError() == null || wr.getError().isEmpty());
+        return (wr.getError() == null);
     }
 }
