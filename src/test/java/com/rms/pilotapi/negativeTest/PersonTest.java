@@ -25,19 +25,25 @@ public class PersonTest {
 
         MAPPER = Jackson.newObjectMapper();
         MAPPER.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        person = TestUtils.getRightDummyPerson(123);
 
         lOGGER.info("Person Test End");
     }
 
     @Test
     public void serializesToJSON() throws Exception {
-        assert (MAPPER.writeValueAsString(person).equalsIgnoreCase(fixture("fixtures/person.json")));
+        for(TestUtils.WRONG w: TestUtils.WRONG.values()) {
+            person = TestUtils.getWrongDummyPerson(w);
+            assert (!MAPPER.writeValueAsString(person).equalsIgnoreCase(fixture("fixtures/person.json")));
+        }
+
     }
 
     @Test
     public void deserialiseFromJSON() throws Exception {
         Person p = MAPPER.readValue(fixture("fixtures/person.json"), Person.class);
-        assert (p.equals(person));
+        for(TestUtils.WRONG w: TestUtils.WRONG.values()) {
+            person = TestUtils.getWrongDummyPerson(w);
+            assert (!p.equals(person));
+        }
     }
 }
