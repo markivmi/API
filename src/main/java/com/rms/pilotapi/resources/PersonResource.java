@@ -27,7 +27,7 @@ public class PersonResource {
     @GET
     @Timed
     @Path("/getAuthPerson/{id}")
-    public Person getAuthPerson(@PathParam("id") int id, @Auth Boolean isAuthenticated) throws WebApplicationException {
+    public Person getAuthPerson(@PathParam("id") long id, @Auth Boolean isAuthenticated) throws WebApplicationException {
 
         /* use HTTP header:
         Authorization : Basic dGVzdDpzZWNyZXQ=
@@ -40,16 +40,31 @@ public class PersonResource {
             throw new WebApplicationException(Response.Status.UNAUTHORIZED);
         }
 
+        if(id<=0) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
         return personDao.getPerson(id);
     }
 
     @GET
     @Timed
     @Path("/{id}")
-    public Person getPerson(@PathParam("id") Integer id) {
+    public Person getPerson(@PathParam("id") long id) {
 
-        return personDao.getPerson(id);
+        if(id<=0) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
+
+        Person output = personDao.getPerson(id);
+
+        if(output != null) {
+            return output;
+        }
+
+        throw new WebApplicationException(Response.Status.NOT_FOUND);
     }
+
+
 
     @POST
     @Timed
@@ -72,9 +87,15 @@ public class PersonResource {
     @PUT
     @Timed
     @Path("/{id}")
-    public Person updatePerson(@PathParam("id") Integer id, @Valid Person person) {
+    public Person updatePerson(@PathParam("id") long id, @Valid Person person) {
+
+        if(id<=0) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
+
         Person output;
         try {
+
             output = personDao.updatePerson(id, person);
         } catch (Exception e) {
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
@@ -90,8 +111,13 @@ public class PersonResource {
     @DELETE
     @Timed
     @Path("/{id}")
-    public boolean deletePerson(@PathParam("id") Integer id) {
+    public boolean deletePerson(@PathParam("id") long id) {
         boolean output;
+
+        if(id<=0) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
+
         try {
             output = personDao.deletePerson(id);
         } catch (Exception e) {

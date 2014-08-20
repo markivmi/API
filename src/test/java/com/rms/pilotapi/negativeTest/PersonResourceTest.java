@@ -14,12 +14,17 @@ import io.dropwizard.auth.basic.BasicAuthProvider;
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import javax.ws.rs.core.MediaType;
 
 import static org.mockito.Mockito.*;
 
+@RunWith(JUnit4.class)
 public class PersonResourceTest {
 
     private static final PersonDao personDao = mock(PersonDao.class);
@@ -35,17 +40,27 @@ public class PersonResourceTest {
             .addProvider(new ResponseFilter())
             .build();
 
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
+
     @Before
     public void setup() {
         when(personDao.getPerson(eq(correctId))).thenReturn(correctDummyPerson);
         when(personDao.createPerson(any(Person.class))).thenReturn(correctDummyPerson);
         when(personDao.updatePerson(eq(correctId), any(Person.class))).thenReturn(correctDummyPerson);
         when(personDao.deletePerson(eq(correctId))).thenReturn(true);
+        expectedException.expect(UniformInterfaceException.class);
     }
 
     @Test
     public void testGetNonExistingPerson() {
-        Person personFromAPI = resources.client().resource("/persons/123").get(Person.class);
+        resources.client().resource("/persons/1").get(Person.class);
+        expectedException.expectMessage(String.valueOf(TestUtils.NOT_FOUND));
+    }
+
+    @Test
+    public void testGetInvalidIdPerson() {
+        Person personFromAPI = resources.client().resource("/persons/0").get(Person.class);
         assert (personFromAPI.equals(correctDummyPerson));
     }
 

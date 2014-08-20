@@ -19,6 +19,7 @@ public class ResponseFilter implements ContainerResponseFilter {
     final int NO_CONTENT            = Response.Status.NO_CONTENT.getStatusCode();
     final int NOT_MODIFIED          = Response.Status.NOT_MODIFIED.getStatusCode();
     final int UNAUTHORIZED          = Response.Status.UNAUTHORIZED.getStatusCode();
+    final int BAD_REQUEST          = Response.Status.BAD_REQUEST.getStatusCode();
 
     @Override
     public ContainerResponse filter(ContainerRequest containerRequest, ContainerResponse containerResponse) {
@@ -27,7 +28,11 @@ public class ResponseFilter implements ContainerResponseFilter {
         Response response = containerResponse.getResponse();
         int responseStatus = response.getStatus();
 
-        if(responseStatus == INTERNAL_SERVER_ERROR || responseStatus == UNAUTHORIZED || responseStatus == NOT_FOUND) {
+        if(responseStatus == INTERNAL_SERVER_ERROR ||
+                responseStatus == UNAUTHORIZED ||
+                responseStatus == BAD_REQUEST ||
+                responseStatus == NOT_FOUND) {
+
             containerResponse.setResponse(response);
             return containerResponse;
         }
