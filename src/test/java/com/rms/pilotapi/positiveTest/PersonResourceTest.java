@@ -1,13 +1,12 @@
 package com.rms.pilotapi.positiveTest;
 
 import com.rms.auth.BasicAuthenticator;
-import com.rms.interceptor.PilotInterceptor;
+import com.rms.interceptor.RequestFilter;
 import com.rms.pilotapi.TestUtils;
 import com.rms.pilotapi.core.Person;
 import com.rms.pilotapi.dao.PersonDao;
 import com.rms.pilotapi.resources.PersonResource;
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import io.dropwizard.auth.basic.BasicAuthProvider;
 import io.dropwizard.testing.junit.ResourceTestRule;
@@ -28,7 +27,7 @@ public class PersonResourceTest {
     public static final ResourceTestRule resources = ResourceTestRule.builder()
             .addResource(new PersonResource(personDao))
             .addProvider(new BasicAuthProvider<>(new BasicAuthenticator(), "TestAuthenticator"))
-            .addProvider(new PilotInterceptor())
+            .addProvider(new RequestFilter())
             .build();
 
     @Before
@@ -64,31 +63,10 @@ public class PersonResourceTest {
     }
 
     @Test
-    public void testAuthPersonPositive() throws Exception {
+    public void testAuthPerson() throws Exception {
         Client client = resources.client();
         client.addFilter(new HTTPBasicAuthFilter("user", "secret"));
         Person personFromAPI = client.resource("/persons/getAuthPerson/123").get(Person.class);
         assert (personFromAPI.equals(person));
-    }
-
-    @Test
-    public void testAuthPersonNegative() throws Exception {
-        Client client = resources.client();
-        client.addFilter(new HTTPBasicAuthFilter("user", "wrong-secret"));
-        try {
-            client.resource("/persons/getAuthPerson/123").get(Person.class);
-        } catch (UniformInterfaceException e) {
-            assert (e.getResponse().getStatus() == 401);
-        }
-    }
-
-    @Test
-    public void testAuthPersonNegativeNoHeader() throws Exception {
-        Client client = resources.client();
-        try {
-            client.resource("/persons/getAuthPerson/123").get(Person.class);
-        } catch (UniformInterfaceException e) {
-            assert (e.getResponse().getStatus() == 401);
-        }
     }
 }

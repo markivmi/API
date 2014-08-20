@@ -23,7 +23,7 @@ public class ResponseFilter implements ContainerResponseFilter {
     @Override
     public ContainerResponse filter(ContainerRequest containerRequest, ContainerResponse containerResponse) {
 
-        PilotInterceptor.MethodType methodType = PilotInterceptor.getMethodType(containerRequest);
+        RequestFilter.MethodType methodType = RequestFilter.getMethodType(containerRequest);
         Response response = containerResponse.getResponse();
         int responseStatus = response.getStatus();
 

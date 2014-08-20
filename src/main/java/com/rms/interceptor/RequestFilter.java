@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import java.util.List;
 
-public class PilotInterceptor implements ContainerRequestFilter {
+public class RequestFilter implements ContainerRequestFilter {
 
     static enum MethodType {
         NONE,
