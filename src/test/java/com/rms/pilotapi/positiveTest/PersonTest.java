@@ -1,7 +1,8 @@
-package com.rms.pilotapi.test;
+package com.rms.pilotapi.positiveTest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.rms.pilotapi.TestUtils;
 import com.rms.pilotapi.core.Person;
 import io.dropwizard.jackson.Jackson;
 import org.junit.BeforeClass;

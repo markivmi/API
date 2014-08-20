@@ -1,8 +1,9 @@
-package com.rms.pilotapi.test;
+package com.rms.pilotapi.positiveTest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rms.pilotapi.PilotAPIApplication;
 import com.rms.pilotapi.PilotAPIConfiguration;
+import com.rms.pilotapi.TestUtils;
 import com.rms.pilotapi.core.Person;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;

@@ -1,4 +1,4 @@
-package com.rms.pilotapi.test;
+package com.rms.pilotapi.positiveTest;
 
 public class PersonApplicationTest {
 /*

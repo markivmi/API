@@ -1,6 +1,7 @@
-package com.rms.pilotapi.test;
+package com.rms.pilotapi.positiveTest;
 
 import com.rms.common.Functor;
+import com.rms.pilotapi.TestUtils;
 import com.rms.pilotapi.core.Person;
 import com.rms.pilotapi.dao.PersonDaoMongoImpl;
 import org.junit.After;

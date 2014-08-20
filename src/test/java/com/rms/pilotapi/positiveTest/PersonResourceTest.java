@@ -1,7 +1,8 @@
-package com.rms.pilotapi.test;
+package com.rms.pilotapi.positiveTest;
 
 import com.rms.auth.BasicAuthenticator;
 import com.rms.interceptor.PilotInterceptor;
+import com.rms.pilotapi.TestUtils;
 import com.rms.pilotapi.core.Person;
 import com.rms.pilotapi.dao.PersonDao;
 import com.rms.pilotapi.resources.PersonResource;
