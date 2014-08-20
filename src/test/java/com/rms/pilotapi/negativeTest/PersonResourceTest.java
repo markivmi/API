@@ -23,7 +23,7 @@ import static org.mockito.Mockito.*;
 public class PersonResourceTest {
 
     private static final PersonDao personDao = mock(PersonDao.class);
-    private final long correctId = 123;
+    private static final long correctId = 123;
     private final Person correctDummyPerson = TestUtils.getRightDummyPerson(correctId);
     private Person wrongDummyPerson;
 

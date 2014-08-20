@@ -46,6 +46,10 @@
       </list>
     </option>
   </component>
+  <component name="Osmorc">
+    <option name="bundlesOutputPath" value="$PROJECT_DIR$/out/bundles" />
+    <option name="frameworkInstanceName" value="Equinox (3.10.0.v20140606-1445)" />
+  </component>
   <component name="ProjectKey">
     <option name="state" value="https://github.com/markivmi/API.git" />
   </component>
