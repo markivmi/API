@@ -53,15 +53,15 @@ public class PersonResource {
 
         if(id<=0) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        } else {
+            Person output = personDao.getPerson(id);
+
+            if(output != null) {
+                return output;
+            }
+
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-
-        Person output = personDao.getPerson(id);
-
-        if(output != null) {
-            return output;
-        }
-
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
     }
 
 
