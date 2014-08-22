@@ -1,9 +1,6 @@
-package com.rms.pilotapi.positiveTest;
+package com.rms.pilotapi;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rms.pilotapi.PilotAPIApplication;
-import com.rms.pilotapi.PilotAPIConfiguration;
-import com.rms.pilotapi.TestUtils;
 import com.rms.pilotapi.core.Person;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -47,7 +44,8 @@ public class PersonApplicationIntegrationTest {
     @Test
     public void createPersonTest() {
         String url = String.format("http://localhost:%d/persons/", localPort);
-        response = client.resource(url).type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).post(ClientResponse.class, inputPerson);
+        response = client.resource(url).type(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).post
+                (ClientResponse.class, inputPerson);
 
         String jsonString = response.getEntity(String.class);
         try {
@@ -56,8 +54,8 @@ public class PersonApplicationIntegrationTest {
             e.printStackTrace();
             assert (false);
         }
-        assert(outputPerson.getId() > 0);
-        assert(response.getStatus() == 201);
+        assert (outputPerson.getId() > 0);
+        assert (response.getStatus() == 201);
     }
 
 }

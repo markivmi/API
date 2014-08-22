@@ -1,9 +1,8 @@
-package com.rms.pilotapi.positiveTest;
+package com.rms.pilotapi.dao;
 
 import com.rms.common.Functor;
 import com.rms.pilotapi.TestUtils;
 import com.rms.pilotapi.core.Person;
-import com.rms.pilotapi.dao.PersonDaoMongoImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -36,6 +35,10 @@ public class PersonDaoMongoImplTest {
     public void SetupDao() {
         doReturn(null).when(mockWriteResult).getError();
         doReturn(count).when(mockWriteResult).getSavedId();
+
+        if (mockCollection == null || mockWriteResult == null) {
+            throw new NullPointerException();
+        }
 
         when(mockCollection.getCount()).thenReturn(count);
         when(mockCollection.findOneById(anyLong())).thenReturn(outputPerson);

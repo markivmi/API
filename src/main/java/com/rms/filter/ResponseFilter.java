@@ -1,4 +1,4 @@
-package com.rms.interceptor;
+package com.rms.filter;
 
 import com.rms.pilotapi.core.Person;
 import com.sun.jersey.spi.container.ContainerRequest;
@@ -12,14 +12,14 @@ import javax.ws.rs.core.Response;
 public class ResponseFilter implements ContainerResponseFilter {
 
     final int INTERNAL_SERVER_ERROR = Response.Status.INTERNAL_SERVER_ERROR.getStatusCode();
-    final int OK                    = Response.Status.OK.getStatusCode();
-    final int CREATED               = Response.Status.CREATED.getStatusCode();
-    final int NOT_FOUND             = Response.Status.NOT_FOUND.getStatusCode();
-    final int ACCEPTED              = Response.Status.ACCEPTED.getStatusCode();
-    final int NO_CONTENT            = Response.Status.NO_CONTENT.getStatusCode();
-    final int NOT_MODIFIED          = Response.Status.NOT_MODIFIED.getStatusCode();
-    final int UNAUTHORIZED          = Response.Status.UNAUTHORIZED.getStatusCode();
-    final int BAD_REQUEST          = Response.Status.BAD_REQUEST.getStatusCode();
+    final int OK = Response.Status.OK.getStatusCode();
+    final int CREATED = Response.Status.CREATED.getStatusCode();
+    final int NOT_FOUND = Response.Status.NOT_FOUND.getStatusCode();
+    final int ACCEPTED = Response.Status.ACCEPTED.getStatusCode();
+    final int NO_CONTENT = Response.Status.NO_CONTENT.getStatusCode();
+    final int NOT_MODIFIED = Response.Status.NOT_MODIFIED.getStatusCode();
+    final int UNAUTHORIZED = Response.Status.UNAUTHORIZED.getStatusCode();
+    final int BAD_REQUEST = Response.Status.BAD_REQUEST.getStatusCode();
 
     @Override
     public ContainerResponse filter(ContainerRequest containerRequest, ContainerResponse containerResponse) {
@@ -28,7 +28,7 @@ public class ResponseFilter implements ContainerResponseFilter {
         Response response = containerResponse.getResponse();
         int responseStatus = response.getStatus();
 
-        if(responseStatus == INTERNAL_SERVER_ERROR ||
+        if (responseStatus == INTERNAL_SERVER_ERROR ||
                 responseStatus == UNAUTHORIZED ||
                 responseStatus == BAD_REQUEST ||
                 responseStatus == NOT_FOUND) {
@@ -41,12 +41,12 @@ public class ResponseFilter implements ContainerResponseFilter {
 
         Response.ResponseBuilder responseBuilder = Response.fromResponse(response);
 
+        //TODO: Remove instanceof Person from the switch cases
         switch (methodType) {
-
             case NONE:
                 containerResponse.setStatus(INTERNAL_SERVER_ERROR);
             case GET:
-                if(entity != null && entity instanceof Person) {
+                if (entity != null && entity instanceof Person) {
                     responseBuilder.entity(entity);
                     responseBuilder.status(OK);
                 } else {
@@ -54,7 +54,7 @@ public class ResponseFilter implements ContainerResponseFilter {
                 }
                 break;
             case PUT:
-                if(entity != null && entity instanceof Person) {
+                if (entity != null && entity instanceof Person) {
                     responseBuilder.entity(entity);
                     responseBuilder.status(OK);
                 } else {
@@ -62,7 +62,7 @@ public class ResponseFilter implements ContainerResponseFilter {
                 }
                 break;
             case POST:
-                if(entity != null && entity instanceof Person) {
+                if (entity != null && entity instanceof Person) {
                     responseBuilder.entity(entity);
                     responseBuilder.status(CREATED);
                 } else {
@@ -70,7 +70,7 @@ public class ResponseFilter implements ContainerResponseFilter {
                 }
                 break;
             case DELETE:
-                if(entity != null && entity instanceof Person) {
+                if (entity != null && entity instanceof Person) {
                     responseBuilder.entity(entity);
                     responseBuilder.status(NO_CONTENT);
                 } else {

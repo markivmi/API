@@ -1,4 +1,5 @@
 package com.rms.pilotapi;
+
 import com.rms.pilotapi.core.Address;
 import com.rms.pilotapi.core.Coordinates;
 import com.rms.pilotapi.core.Person;
@@ -11,13 +12,14 @@ import java.util.Random;
 public class TestUtils {
 
     public static final int INTERNAL_SERVER_ERROR = Response.Status.INTERNAL_SERVER_ERROR.getStatusCode();
-    public static final int OK                    = Response.Status.OK.getStatusCode();
-    public static final int CREATED               = Response.Status.CREATED.getStatusCode();
-    public static final int NOT_FOUND             = Response.Status.NOT_FOUND.getStatusCode();
-    public static final int ACCEPTED              = Response.Status.ACCEPTED.getStatusCode();
-    public static final int NO_CONTENT            = Response.Status.NO_CONTENT.getStatusCode();
-    public static final int NOT_MODIFIED          = Response.Status.NOT_MODIFIED.getStatusCode();
-    public static final int UNAUTHORIZED          = Response.Status.UNAUTHORIZED.getStatusCode();
+    public static final int OK = Response.Status.OK.getStatusCode();
+    public static final int CREATED = Response.Status.CREATED.getStatusCode();
+    public static final int NOT_FOUND = Response.Status.NOT_FOUND.getStatusCode();
+    public static final int ACCEPTED = Response.Status.ACCEPTED.getStatusCode();
+    public static final int NO_CONTENT = Response.Status.NO_CONTENT.getStatusCode();
+    public static final int NOT_MODIFIED = Response.Status.NOT_MODIFIED.getStatusCode();
+    public static final int UNAUTHORIZED = Response.Status.UNAUTHORIZED.getStatusCode();
+    public static final int BAD_REQUEST = Response.Status.BAD_REQUEST.getStatusCode();
 
     public enum WRONG {
         AGE,
@@ -43,7 +45,7 @@ public class TestUtils {
 
     private static int getWrongZip() {
         boolean positive = randomGenerator.nextBoolean();
-        if(positive) {
+        if (positive) {
             return 99999 + randomGenerator.nextInt();
         } else {
             return -1 * randomGenerator.nextInt();
@@ -77,7 +79,7 @@ public class TestUtils {
         boolean longitude = randomGenerator.nextBoolean();
         boolean empty = randomGenerator.nextBoolean();
         String coordinate;
-        if(empty) {
+        if (empty) {
             coordinate = "";
         } else {
             coordinate = "123435S";

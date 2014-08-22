@@ -27,7 +27,8 @@ public class PersonResource {
     @GET
     @Timed
     @Path("/getAuthPerson/{id}")
-    public Person getAuthPerson(@PathParam("id") long id, @Auth Boolean isAuthenticated) throws WebApplicationException {
+    public Person getAuthPerson(@PathParam("id") long id, @Auth Boolean isAuthenticated) throws
+            WebApplicationException {
 
         /* use HTTP header:
         Authorization : Basic dGVzdDpzZWNyZXQ=
@@ -40,7 +41,7 @@ public class PersonResource {
             throw new WebApplicationException(Response.Status.UNAUTHORIZED);
         }
 
-        if(id<=0) {
+        if (id <= 0) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         return personDao.getPerson(id);
@@ -51,19 +52,18 @@ public class PersonResource {
     @Path("/{id}")
     public Person getPerson(@PathParam("id") long id) {
 
-        if(id<=0) {
+        if (id <= 0) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
 
         Person output = personDao.getPerson(id);
 
-        if(output != null) {
+        if (output != null) {
             return output;
         }
 
         throw new WebApplicationException(Response.Status.NOT_FOUND);
     }
-
 
 
     @POST
@@ -72,7 +72,7 @@ public class PersonResource {
         Person output;
 
         try {
-            output =  personDao.createPerson(person);
+            output = personDao.createPerson(person);
         } catch (Exception e) {
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
@@ -89,7 +89,7 @@ public class PersonResource {
     @Path("/{id}")
     public Person updatePerson(@PathParam("id") long id, @Valid Person person) {
 
-        if(id<=0) {
+        if (id <= 0) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
 
@@ -114,7 +114,7 @@ public class PersonResource {
     public boolean deletePerson(@PathParam("id") long id) {
         boolean output;
 
-        if(id<=0) {
+        if (id <= 0) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
 

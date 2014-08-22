@@ -29,7 +29,8 @@ public class PilotAPIModule extends AbstractModule {
       * it should satisfy the dependency using a PersonDaoMongoImpl.
       */
 
-        bind(new TypeLiteral<Functor<String, JacksonDBCollection<Person, Long>>>() {}).toInstance(getJacksonDBCollection);
+        bind(new TypeLiteral<Functor<String, JacksonDBCollection<Person, Long>>>() {
+        }).toInstance(getJacksonDBCollection);
         bind(PersonDao.class).to(PersonDaoMongoImpl.class).asEagerSingleton();
     }
 
@@ -49,5 +50,6 @@ public class PilotAPIModule extends AbstractModule {
     }
 
     public Functor<String, JacksonDBCollection<Person, Long>> getJacksonDBCollection =
-            (String collectionName) -> JacksonDBCollection.wrap(getDB().getCollection(collectionName), Person.class, Long.class);
+            (String collectionName) -> JacksonDBCollection.wrap(getDB().getCollection(collectionName), Person.class,
+                    Long.class);
 }
