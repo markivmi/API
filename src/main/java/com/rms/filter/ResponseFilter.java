@@ -38,7 +38,6 @@ public class ResponseFilter implements ContainerResponseFilter {
         }
 
         Object entity = containerResponse.getOriginalEntity();
-
         Response.ResponseBuilder responseBuilder = Response.fromResponse(response);
 
         //TODO: Remove instanceof Person from the switch cases

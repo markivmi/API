@@ -27,8 +27,7 @@ public class PersonResource {
     @GET
     @Timed
     @Path("/getAuthPerson/{id}")
-    public Person getAuthPerson(@PathParam("id") long id, @Auth Boolean isAuthenticated) throws
-            WebApplicationException {
+    public Person getAuthPerson(@PathParam("id") long id, @Auth Boolean isAuthenticated) throws WebApplicationException {
 
         /* use HTTP header:
         Authorization : Basic dGVzdDpzZWNyZXQ=
@@ -55,15 +54,16 @@ public class PersonResource {
         if (id <= 0) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
+        else {
+            Person output = personDao.getPerson(id);
+            if (output != null) {
+                return output;
+            }
 
-        Person output = personDao.getPerson(id);
-
-        if (output != null) {
-            return output;
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-
-        throw new WebApplicationException(Response.Status.NOT_FOUND);
     }
+
 
 
     @POST
@@ -72,7 +72,7 @@ public class PersonResource {
         Person output;
 
         try {
-            output = personDao.createPerson(person);
+            output =  personDao.createPerson(person);
         } catch (Exception e) {
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }

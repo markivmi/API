@@ -1,5 +1,4 @@
 package com.rms.pilotapi;
-
 import com.rms.pilotapi.core.Address;
 import com.rms.pilotapi.core.Coordinates;
 import com.rms.pilotapi.core.Person;
