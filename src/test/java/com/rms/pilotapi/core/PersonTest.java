@@ -18,7 +18,7 @@ import static io.dropwizard.testing.FixtureHelpers.fixture;
 public class PersonTest {
 
     private static ObjectMapper MAPPER;
-    private static Person validDummyPerson = TestUtils.getRightDummyPerson(123);
+    private static Person rightDummyPerson = TestUtils.getRightDummyPerson(123);
     private static Logger lOGGER = LoggerFactory.getLogger(PersonTest.class);
 
     @Rule
@@ -37,13 +37,13 @@ public class PersonTest {
     //region Positive tests
     @Test
     public void shouldSerializeToJSON() throws Exception {
-        assert (MAPPER.writeValueAsString(validDummyPerson).equalsIgnoreCase(fixture("fixtures/person.json")));
+        assert (MAPPER.writeValueAsString(rightDummyPerson).equalsIgnoreCase(fixture("fixtures/person.json")));
     }
 
     @Test
     public void shouldDeserializeFromJSON() throws Exception {
         Person p = MAPPER.readValue(fixture("fixtures/person.json"), Person.class);
-        assert (p.equals(validDummyPerson));
+        assert (p.equals(rightDummyPerson));
     }
     //endregion
 
@@ -74,7 +74,7 @@ public class PersonTest {
     @PerfTest(invocations = 100, threads = 10)
     @Required(average = 100, max = 150)
     public void shouldSerializeToJSONPerf() throws Exception {
-        MAPPER.writeValueAsString(validDummyPerson);
+        MAPPER.writeValueAsString(rightDummyPerson);
     }
 
     @Test
@@ -82,7 +82,7 @@ public class PersonTest {
     @Required(average = 1500, max = 2000)
     public void shouldDeserializeFromJSONPerf() throws Exception {
         Person p = MAPPER.readValue(fixture("fixtures/person.json"), Person.class);
-        assert (p.equals(validDummyPerson));
+        assert (p.equals(rightDummyPerson));
     }
     //endregion
 }
