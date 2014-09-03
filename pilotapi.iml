@@ -8,8 +8,10 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/.clover" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
+    <orderEntry type="library" name="Clover IDEA Plugin" level="application" />
     <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: io.dropwizard:dropwizard-auth:0.7.1" level="project" />
@@ -87,6 +89,7 @@
     <orderEntry type="library" name="Maven: com.google.inject:guice:3.0" level="project" />
     <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
     <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.databene:contiperf:2.2.0" level="project" />
     <orderEntry type="library" name="Maven: org.mongojack:mongojack:2.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:mongo-java-driver:2.12.0" level="project" />
     <orderEntry type="library" name="Maven: de.undercouch:bson4jackson:2.3.1" level="project" />
